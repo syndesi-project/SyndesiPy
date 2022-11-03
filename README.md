@@ -1,2 +1,2 @@
-# SyndesiPy
-Syndesi Python implementation
+# syndesiCLI
+Syndesi command line interface
