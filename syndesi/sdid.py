@@ -1,43 +1,21 @@
-# Sébastien Deriaz
-# 03.11.2022
+# Syndesi ID
 #
-# Syndesi ID wrapper
+# Sébastien Deriaz
+# 14.11.2022
+from enum import Enum
 
-from .libsyndesi import LibSyndesi
+class AddressType(Enum):
+        NONE = 0
+        IPV4 = 1
+        IPV6 = 2
 
 class SyndesiID:
-    def __init__(self, libsyndesi : LibSyndesi, descriptor : str):
+    def __init__(self, addressType : AddressType):
         """
-        Create a new syndesi ID
+        Syndesi ID instance
 
         Parameters
         ----------
-        libsyndesi : LibSyndesi
-            Syndesi library wrapper
-        descriptor : str
-            ID descriptor (needs documentation)
+
         """
-        self._lib = libsyndesi._lib
-        # Create a new SyndesiID
-        self._pid = self._lib.newSyndesiID()
-
-        b_descriptor = descriptor.encode('utf-8')
-
-        if self._lib.syndesiIDParseDescriptor(self._pid, b_descriptor):
-            # Success !
-            pass
-        else:
-            raise ValueError(f"Couldn't parse descriptor : \"{descriptor}\"")
-
-    def __str__(self) -> str:
-        raw_string = self._lib.syndesiIDString(self._pid)
-        return raw_string.decode('utf-8')
-
-    def __del__(self):
-        self._lib.delSyndesiID(self._pid)
-
-
-
-
-
-    
+        self.addressType = addressType
